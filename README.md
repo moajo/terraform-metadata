@@ -4,7 +4,7 @@ Github action and terraform module to refer to the infrastructure information cr
 
 ## 1. Generate `meta.json` by terraform
 
-以下のコードは、`meta.json` に terraform で作成したインフラの情報を出力します。
+The following code outputs information about the infrastructure created by terraform in `meta.json`.
 このファイルは git 管理します。
 
 ```terraform
@@ -17,6 +17,15 @@ module "metadata" {
     SG_ID      = aws_security_group.example.id,
     # ...
   }
+}
+```
+
+```bash
+$ cat meta.json | jq
+{
+  "ACCOUNT_ID": "123456789012",
+  "SG_ID": "sg-12345678901234567",
+  # ...
 }
 ```
 
