@@ -1,0 +1,11 @@
+name: "Terraform metadata"
+description: "Export terraform metadata as environment variables on github actions"
+inputs:
+  metadata_path:
+    description: "Path to metadata. (.e.g ./terraform/metadata/meta.json)"
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - run: ${{ github.action_path }}/parse-and-export.sh ${{ inputs.metadata_path }} >> $GITHUB_ENV
+      shell: bash
