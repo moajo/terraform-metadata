@@ -4,8 +4,8 @@ Github action and terraform module to refer to the infrastructure information cr
 
 ## 1. Generate `meta.json` by terraform
 
-The following code outputs information about the infrastructure created by terraform in `meta.json`.
-このファイルは git 管理します。
+The following code outputs information about the infrastructure created by terraform in `meta.json`.  
+This file should be under git version control.
 
 ```terraform
 module "metadata" {
