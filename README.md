@@ -9,7 +9,7 @@
 
 ```terraform
 module "metadata" {
-  source = "moajo/terraform-metadata"
+  source = "git@github.com:moajo/terraform-metadata?ref=v1"
 
   metadata_path = "meta.json"
   vars = {
@@ -30,7 +30,7 @@ jobs:
     name: this is sample
     steps:
       - uses: actions/checkout@v3
-      - uses: moajo/terraform-metadata
+      - uses: moajo/terraform-metadata@v1
         with:
           metadata_path: "./meta.json"
       - run: echo "Current account is $ACCOUNT_ID !"

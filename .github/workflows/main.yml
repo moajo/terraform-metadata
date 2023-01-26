@@ -5,8 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - id: foo
-        uses: moajo/terraform-metadata@main
+      - uses: moajo/terraform-metadata@main
         with:
           metadata_path: test/sample.json
       - run: echo "$DATA"
