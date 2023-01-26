@@ -7,5 +7,14 @@ inputs:
 runs:
   using: "composite"
   steps:
+    - run: |
+        [[ "${{ inputs.metadata_path }}" ]] || { echo "metadata_path input is empty" ; exit 1; }
+      shell: bash
+    - run: |
+        if [ ! -f ${{ inputs.metadata_path }} ]; then
+            echo "ERROR: file ${{ inputs.metadata_path }} not found."
+            exit 1
+        fi
+      shell: bash
     - run: ${{ github.action_path }}/parse-and-export.sh ${{ inputs.metadata_path }} >> $GITHUB_ENV
       shell: bash
