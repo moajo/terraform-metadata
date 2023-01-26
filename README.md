@@ -1,10 +1,10 @@
-インフラ情報を CI 等から参照するために、ファイルに出力しておく
+Github action and terraform module to refer to the infrastructure information created by terraform from CI/CD.
 
 # Usage
 
 ## 1. Generate `meta.json` by terraform
 
-以下のコードは、`meta.json` に terraform で作成したインフラの情報を出力する例です。
+以下のコードは、`meta.json` に terraform で作成したインフラの情報を出力します。
 このファイルは git 管理します。
 
 ```terraform
@@ -13,10 +13,9 @@ module "metadata" {
 
   metadata_path = "meta.json"
   vars = {
-    ACCOUNT_ID       = "0123456789",
-    AWS_REGION       = "ap-northeast-1",
-    ECR_URL          = module.main.ecr_repo_url,
-    ECS_CLUSTER_NAME = module.main.ecs_cluster_name,
+    ACCOUNT_ID = data.aws_caller_identity.current.account_id,
+    SG_ID      = aws_security_group.example.id,
+    # ...
   }
 }
 ```
@@ -34,4 +33,5 @@ jobs:
         with:
           metadata_path: "./meta.json"
       - run: echo "Current account is $ACCOUNT_ID !"
+      # use $ACCOUNT_ID, $SG_ID, ...
 ```
